@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kế hoạch học tập tuần - Nhóm 4</title>
+    <!-- Bắt buộc dùng External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+
+    <header>
+        <h1>Kế hoạch học tập tuần</h1>
+        <p>Tuần 16/10 – 22/10/2026</p>
+        <nav>
+            <ul>
+                <li><a href="#thuhai">Thứ 2</a></li>
+                <li><a href="#thuba">Thứ 3</a></li>
+                <li><a href="#thutu">Thứ 4</a></li>
+                <li><a href="#thunam">Thứ 5</a></li>
+                <li><a href="#thusau">Thứ 6</a></li>
+                <li><a href="#thubay">Thứ 7</a></li>
+                <li><a href="#chunhat">Chủ Nhật</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section id="thuhai" class="day-card">
+            <h2>Thứ Hai</h2>
+            <ul>
+                <li>Học HTML cấu trúc cơ bản và Semantic tags</li>
+                <li>Làm bài tập thẻ Heading & Paragraph</li>
+                <li>Xem video bài giảng chương 2</li>
+            </ul>
+        </section>
+
+        <section id="thuba" class="day-card">
+            <h2>Thứ Ba</h2>
+            <ul>
+                <li>Học CSS selectors & Box model</li>
+                <li>Thực hành Float và Position</li>
+            </ul>
+        </section>
+
+        <section id="thutu" class="day-card">
+            <h2>Thứ Tư</h2>
+            <ul>
+                <li>Ôn tập JavaScript validation cơ bản</li>
+                <li>Làm form kiểm tra dữ liệu</li>
+                <li>Code thử 2 bài tập nhỏ</li>
+            </ul>
+        </section>
+
+        <section id="thunam" class="day-card">
+            <h2>Thứ Năm</h2>
+            <ul>
+                <li>Làm đồ án nhóm thương mại điện tử</li>
+                <li>Họp nhóm online lúc 20:00</li>
+            </ul>
+        </section>
+
+        <section id="thusau" class="day-card">
+            <h2>Thứ Sáu</h2>
+            <ul>
+                <li>Hoàn thiện CSS cho đồ án giữa kỳ</li>
+                <li>Kiểm tra responsive cơ bản trên trình duyệt</li>
+            </ul>
+        </section>
+
+        <section id="thubay" class="day-card">
+            <h2>Thứ Bảy</h2>
+            <ul>
+                <li>Nghỉ ngơi và ôn lại kiến thức tuần qua</li>
+            </ul>
+        </section>
+
+        <section id="chunhat" class="day-card">
+            <h2>Chủ Nhật</h2>
+            <ul>
+                <li>Review code cả nhóm trên GitHub</li>
+                <li>Chuẩn bị nội dung trả lời vấn đáp</li>
+            </ul>
+        </section>
+
+        <!-- Form thêm việc kèm Validation JavaScript đủ 3 điều kiện -->
+        <section class="form-card">
+            <h2>Thêm việc mới</h2>
+            <form id="taskForm" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label for="taskName">Tên việc:</label>
+                    <input type="text" id="taskName" placeholder="Ví dụ: Học C# nâng cao">
+                </div>
+
+                <div class="form-group">
+                    <label for="taskDate">Ngày:</label>
+                    <input type="date" id="taskDate">
+                </div>
+
+                <div class="form-group">
+                    <label for="taskEmail">Email liên hệ (nếu có):</label>
+                    <input type="text" id="taskEmail" placeholder="nhom4@ueh.edu.vn">
+                </div>
+
+                <button type="submit" class="btn-submit">Thêm việc</button>
+            </form>
+        </section>
+
+        <p class="summary-text">
+            Tổng kết: Hãy cố gắng hoàn thành ít nhất 90% kế hoạch mỗi tuần để đạt kết quả tốt nhất!
+        </p>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Kế hoạch học tập | <a href="#top">Về đầu trang</a></p>
+    </footer>
+
+    <!-- JavaScript kiểm tra dữ liệu (Validation) -->
+    <script>
+        function validateForm() {
+            var taskName = document.getElementById("taskName").value.trim();
+            var taskDate = document.getElementById("taskDate").value;
+            var taskEmail = document.getElementById("taskEmail").value.trim();
+
+            // 1. Kiểm tra Tên việc không được rỗng
+            if (taskName === "") {
+                alert("Lỗi: Tên việc không được để trống!");
+                document.getElementById("taskName").focus();
+                return false;
+            }
+
+            // 2. Kiểm tra Ngày phải được chọn
+            if (taskDate === "") {
+                alert("Lỗi: Vui lòng chọn ngày thực hiện công việc!");
+                document.getElementById("taskDate").focus();
+                return false;
+            }
+
+            // 3. Kiểm tra Email (nếu nhập thì bắt buộc có chứa ký tự @)
+            if (taskEmail !== "" && !taskEmail.includes("@")) {
+                alert("Lỗi: Địa chỉ email phải chứa ký tự '@'!");
+                document.getElementById("taskEmail").focus();
+                return false;
+            }
+
+            alert("Thêm việc thành công!");
+            return true;
+        }
+    </script>
+</body>
+</html>
