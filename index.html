@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kế hoạch học tập tuần - Nhóm 4</title>
-    <!-- Bắt buộc dùng External CSS -->
+    <title>Kế hoạch học tập tuần - Đề tài 3</title>
+    <!-- Liên kết External CSS bắt buộc -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="top">
 
+    <!-- HEADER & MENU ĐIỀU HƯỚNG -->
     <header>
         <h1>Kế hoạch học tập tuần</h1>
         <p>Tuần 16/10 – 22/10/2026</p>
@@ -25,7 +26,9 @@
         </nav>
     </header>
 
+    <!-- NỘI DUNG CHÍNH -->
     <main class="container">
+        <!-- CÁC KHỐI NGÀY TRONG TUẦN -->
         <section id="thuhai" class="day-card">
             <h2>Thứ Hai</h2>
             <ul>
@@ -83,18 +86,27 @@
             </ul>
         </section>
 
-        <!-- Form thêm việc kèm Validation JavaScript đủ 3 điều kiện -->
+        <!-- FORM THÊM VIỆC MỚI (CÓ VALIDATION & TÍNH NĂNG CỘNG ĐIỂM CẬP NHẬT DANH SÁCH) -->
         <section class="form-card">
             <h2>Thêm việc mới</h2>
-            <form id="taskForm" onsubmit="return validateForm()">
+            <form id="taskForm">
                 <div class="form-group">
                     <label for="taskName">Tên việc:</label>
-                    <input type="text" id="taskName" placeholder="Ví dụ: Học C# nâng cao">
+                    <input type="text" id="taskName" placeholder="Ví dụ: Ôn tập C# nâng cao">
                 </div>
 
                 <div class="form-group">
-                    <label for="taskDate">Ngày:</label>
-                    <input type="date" id="taskDate">
+                    <label for="taskDay">Thứ trong tuần:</label>
+                    <select id="taskDay">
+                        <option value="">-- Chọn ngày --</option>
+                        <option value="thuhai">Thứ Hai</option>
+                        <option value="thuba">Thứ Ba</option>
+                        <option value="thutu">Thứ Tư</option>
+                        <option value="thunam">Thứ Năm</option>
+                        <option value="thusau">Thứ Sáu</option>
+                        <option value="thubay">Thứ Bảy</option>
+                        <option value="chunhat">Chủ Nhật</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -102,50 +114,60 @@
                     <input type="text" id="taskEmail" placeholder="nhom4@ueh.edu.vn">
                 </div>
 
-                <button type="submit" class="btn-submit">Thêm việc</button>
+                <button type="button" id="btnAdd" class="btn-submit">Thêm việc</button>
             </form>
         </section>
 
+        <!-- ĐOẠN P TỔNG KẾT CUỐI TRANG -->
         <p class="summary-text">
             Tổng kết: Hãy cố gắng hoàn thành ít nhất 90% kế hoạch mỗi tuần để đạt kết quả tốt nhất!
         </p>
     </main>
 
+    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 - Kế hoạch học tập | <a href="#top">Về đầu trang</a></p>
+        <p>&copy; 2026 - Kế hoạch học tập tuần | <a href="#top">Về đầu trang</a></p>
     </footer>
 
-    <!-- JavaScript kiểm tra dữ liệu (Validation) -->
+    <!-- JAVASCRIPT VALIDATION & CẬP NHẬT TRỰC TIẾP LÊN DANH SÁCH (TÍNH NĂNG ĐIỂM CỘNG) -->
     <script>
-        function validateForm() {
+        document.getElementById("btnAdd").addEventListener("click", function () {
             var taskName = document.getElementById("taskName").value.trim();
-            var taskDate = document.getElementById("taskDate").value;
+            var taskDay = document.getElementById("taskDay").value;
             var taskEmail = document.getElementById("taskEmail").value.trim();
 
             // 1. Kiểm tra Tên việc không được rỗng
             if (taskName === "") {
                 alert("Lỗi: Tên việc không được để trống!");
                 document.getElementById("taskName").focus();
-                return false;
+                return;
             }
 
             // 2. Kiểm tra Ngày phải được chọn
-            if (taskDate === "") {
-                alert("Lỗi: Vui lòng chọn ngày thực hiện công việc!");
-                document.getElementById("taskDate").focus();
-                return false;
+            if (taskDay === "") {
+                alert("Lỗi: Vui lòng chọn ngày trong tuần!");
+                document.getElementById("taskDay").focus();
+                return;
             }
 
-            // 3. Kiểm tra Email (nếu nhập thì bắt buộc có chứa ký tự @)
+            // 3. Kiểm tra Email (nếu nhập thì bắt buộc phải chứa ký tự @)
             if (taskEmail !== "" && !taskEmail.includes("@")) {
                 alert("Lỗi: Địa chỉ email phải chứa ký tự '@'!");
                 document.getElementById("taskEmail").focus();
-                return false;
+                return;
+            }
+
+            // --- TÍNH NĂNG NHẬN ĐIỂM CỘNG: TỰ ĐỘNG THÊM VÀO DANH SÁCH TƯƠNG ỨNG ---
+            var targetUl = document.querySelector("#" + taskDay + " ul");
+            if (targetUl) {
+                var newLi = document.createElement("li");
+                newLi.textContent = taskName;
+                targetUl.appendChild(newLi);
             }
 
             alert("Thêm việc thành công!");
-            return true;
-        }
+            document.getElementById("taskForm").reset();
+        });
     </script>
 </body>
 </html>
