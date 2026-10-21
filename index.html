@@ -9,11 +9,11 @@
 </head>
 <body id="top">
 
-    <!-- HEADER & MENU ĐIỀU HƯỚNG -->
+    <!-- HEADER VÀ MENU ĐIỀU HƯỚNG -->
     <header>
         <h1>Kế hoạch học tập tuần</h1>
-        <p>Tuần 16/10 – 22/10/2026</p>
-        <nav>
+        <p>Tuần 19/10 – 25/10/2026</p>
+        <nav aria-label="Điều hướng các ngày trong tuần">
             <ul>
                 <li><a href="#thuhai">Thứ 2</a></li>
                 <li><a href="#thuba">Thứ 3</a></li>
@@ -28,7 +28,7 @@
 
     <!-- NỘI DUNG CHÍNH -->
     <main class="container">
-        <!-- CÁC KHỐI NGÀY TRONG TUẦN -->
+        <!-- THỨ HAI -->
         <section id="thuhai" class="day-card">
             <h2>Thứ Hai</h2>
             <ul>
@@ -38,6 +38,7 @@
             </ul>
         </section>
 
+        <!-- THỨ BA -->
         <section id="thuba" class="day-card">
             <h2>Thứ Ba</h2>
             <ul>
@@ -46,6 +47,7 @@
             </ul>
         </section>
 
+        <!-- THỨ TƯ -->
         <section id="thutu" class="day-card">
             <h2>Thứ Tư</h2>
             <ul>
@@ -55,6 +57,7 @@
             </ul>
         </section>
 
+        <!-- THỨ NĂM -->
         <section id="thunam" class="day-card">
             <h2>Thứ Năm</h2>
             <ul>
@@ -63,6 +66,7 @@
             </ul>
         </section>
 
+        <!-- THỨ SÁU -->
         <section id="thusau" class="day-card">
             <h2>Thứ Sáu</h2>
             <ul>
@@ -71,13 +75,16 @@
             </ul>
         </section>
 
+        <!-- THỨ BẢY -->
         <section id="thubay" class="day-card">
             <h2>Thứ Bảy</h2>
             <ul>
                 <li>Nghỉ ngơi và ôn lại kiến thức tuần qua</li>
+                <li>Hoàn thành các bài tập còn lại</li>
             </ul>
         </section>
 
+        <!-- CHỦ NHẬT -->
         <section id="chunhat" class="day-card">
             <h2>Chủ Nhật</h2>
             <ul>
@@ -86,15 +93,16 @@
             </ul>
         </section>
 
-        <!-- FORM THÊM VIỆC MỚI (CÓ VALIDATION & TÍNH NĂNG CỘNG ĐIỂM CẬP NHẬT DANH SÁCH) -->
+        <!-- FORM THÊM CÔNG VIỆC -->
         <section class="form-card">
             <h2>Thêm việc mới</h2>
-            <form id="taskForm">
+            <form id="taskForm" novalidate>
                 <div class="form-group">
                     <label for="taskName">Tên việc:</label>
-                    <input type="text" id="taskName" placeholder="Ví dụ: Ôn tập C# nâng cao">
+                    <input type="text"
+                           id="taskName"
+                           placeholder="Ví dụ: Ôn tập C# nâng cao">
                 </div>
-
                 <div class="form-group">
                     <label for="taskDay">Thứ trong tuần:</label>
                     <select id="taskDay">
@@ -108,66 +116,98 @@
                         <option value="chunhat">Chủ Nhật</option>
                     </select>
                 </div>
-
                 <div class="form-group">
-                    <label for="taskEmail">Email liên hệ (nếu có):</label>
-                    <input type="text" id="taskEmail" placeholder="nhom4@ueh.edu.vn">
+                    <label for="taskEmail">
+                        Email liên hệ (nếu có):
+                    </label>
+                    <input type="text"
+                           id="taskEmail"
+                           placeholder="nhom4@ueh.edu.vn">
                 </div>
-
-                <button type="button" id="btnAdd" class="btn-submit">Thêm việc</button>
+                <button type="submit" id="btnAdd" class="btn-submit">
+                    Thêm việc
+                </button>
             </form>
         </section>
 
-        <!-- ĐOẠN P TỔNG KẾT CUỐI TRANG -->
+        <!-- TỔNG KẾT -->
         <p class="summary-text">
-            Tổng kết: Hãy cố gắng hoàn thành ít nhất 90% kế hoạch mỗi tuần để đạt kết quả tốt nhất!
+            Tổng kết: Hãy cố gắng hoàn thành ít nhất
+            90% kế hoạch mỗi tuần để đạt kết quả tốt nhất!
         </p>
     </main>
 
     <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 - Kế hoạch học tập tuần | <a href="#top">Về đầu trang</a></p>
+        <p>
+            &copy; 2026 - Kế hoạch học tập tuần |
+            <a href="#top">Về đầu trang</a>
+        </p>
     </footer>
 
-    <!-- JAVASCRIPT VALIDATION & CẬP NHẬT TRỰC TIẾP LÊN DANH SÁCH (TÍNH NĂNG ĐIỂM CỘNG) -->
+    <!-- JAVASCRIPT VALIDATION VÀ THÊM CÔNG VIỆC -->
     <script>
-        document.getElementById("btnAdd").addEventListener("click", function () {
-            var taskName = document.getElementById("taskName").value.trim();
-            var taskDay = document.getElementById("taskDay").value;
-            var taskEmail = document.getElementById("taskEmail").value.trim();
+        document.getElementById("taskForm").addEventListener(
+            "submit",
+            function(event) {
 
-            // 1. Kiểm tra Tên việc không được rỗng
-            if (taskName === "") {
-                alert("Lỗi: Tên việc không được để trống!");
-                document.getElementById("taskName").focus();
-                return;
+                // Ngăn form tải lại trang
+                event.preventDefault();
+
+                // Lấy dữ liệu người dùng nhập
+                var taskName = document.getElementById("taskName").value.trim();
+                var taskDay = document.getElementById("taskDay").value;
+                var taskEmail = document.getElementById("taskEmail").value.trim();
+
+                // 1. Kiểm tra tên việc không được rỗng
+                if (taskName === "") {
+                    alert("Lỗi: Tên việc không được để trống!");
+                    document.getElementById("taskName").focus();
+                    return;
+                }
+
+                // 2. Kiểm tra người dùng đã chọn thứ
+                if (taskDay === "") {
+                    alert("Lỗi: Vui lòng chọn ngày trong tuần!");
+                    document.getElementById("taskDay").focus();
+                    return;
+                }
+
+                // 3. Kiểm tra email nếu có nhập
+                if (taskEmail !== "" && !taskEmail.includes("@")) {
+                    alert("Lỗi: Địa chỉ email phải chứa ký tự '@'!");
+                    document.getElementById("taskEmail").focus();
+                    return;
+                }
+
+                // 4. Tìm danh sách công việc của ngày đã chọn
+                var targetUl = document.querySelector("#" + taskDay + " ul");
+
+                if (targetUl) {
+
+                    // Tạo một công việc mới
+                    var newLi = document.createElement("li");
+
+                    // Gán nội dung công việc
+                    newLi.textContent = taskName;
+
+                    // Thêm công việc vào danh sách đúng ngày
+                    targetUl.appendChild(newLi);
+
+                    // Thông báo thêm thành công
+                    alert("Thêm việc thành công!");
+
+                    // Xóa dữ liệu trong form
+                    document.getElementById("taskForm").reset();
+
+                } else {
+                    alert("Lỗi: Không tìm thấy danh sách công việc!");
+                }
             }
-
-            // 2. Kiểm tra Ngày phải được chọn
-            if (taskDay === "") {
-                alert("Lỗi: Vui lòng chọn ngày trong tuần!");
-                document.getElementById("taskDay").focus();
-                return;
-            }
-
-            // 3. Kiểm tra Email (nếu nhập thì bắt buộc phải chứa ký tự @)
-            if (taskEmail !== "" && !taskEmail.includes("@")) {
-                alert("Lỗi: Địa chỉ email phải chứa ký tự '@'!");
-                document.getElementById("taskEmail").focus();
-                return;
-            }
-
-            // --- TÍNH NĂNG NHẬN ĐIỂM CỘNG: TỰ ĐỘNG THÊM VÀO DANH SÁCH TƯƠNG ỨNG ---
-            var targetUl = document.querySelector("#" + taskDay + " ul");
-            if (targetUl) {
-                var newLi = document.createElement("li");
-                newLi.textContent = taskName;
-                targetUl.appendChild(newLi);
-            }
-
-            alert("Thêm việc thành công!");
-            document.getElementById("taskForm").reset();
-        });
+        );
     </script>
+
 </body>
 </html>
+
+

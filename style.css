@@ -1,4 +1,8 @@
-﻿body {
+﻿html {
+    scroll-behavior: smooth;
+}
+
+body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8fafc;
     color: #1e293b;
@@ -7,6 +11,8 @@
     line-height: 1.6;
 }
 
+/* ===== HEADER ===== */
+
 header {
     background: linear-gradient(135deg, #1a237e, #3949ab);
     color: white;
@@ -14,15 +20,17 @@ header {
     padding: 30px 20px;
 }
 
-    header h1 {
-        margin: 0 0 5px 0;
-        font-size: 2rem;
-    }
+header h1 {
+    margin: 0 0 5px 0;
+    font-size: 2rem;
+}
 
-    header p {
-        margin: 0 0 20px 0;
-        color: #cbd5e1;
-    }
+header p {
+    margin: 0 0 20px 0;
+    color: #e2e8f0;
+}
+
+/* ===== MENU ĐIỀU HƯỚNG ===== */
 
 nav ul {
     list-style: none;
@@ -34,7 +42,12 @@ nav ul {
     gap: 8px;
 }
 
+nav li {
+    margin: 0;
+}
+
 nav a {
+    display: block;
     color: white;
     text-decoration: none;
     background: rgba(255, 255, 255, 0.15);
@@ -45,17 +58,22 @@ nav a {
     transition: all 0.3s ease;
 }
 
-    nav a:hover {
-        background: white;
-        color: #1a237e;
-        text-decoration: underline;
-    }
+nav a:hover,
+nav a:focus-visible {
+    background: white;
+    color: #1a237e;
+    text-decoration: underline;
+}
+
+/* ===== BỐ CỤC CHÍNH ===== */
 
 .container {
     max-width: 650px;
     margin: 30px auto;
     padding: 0 15px;
 }
+
+/* ===== CÁC KHỐI NGÀY TRONG TUẦN ===== */
 
 .day-card {
     background: white;
@@ -64,25 +82,38 @@ nav a {
     padding: 20px 25px;
     margin-bottom: 20px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-    .day-card h2 {
-        margin-top: 0;
-        font-size: 1.2rem;
-        color: #1a237e;
-        border-bottom: 2px solid #f1f5f9;
-        padding-bottom: 8px;
-    }
+.day-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
 
-    .day-card ul {
-        margin: 0;
-        padding-left: 20px;
-    }
+.day-card h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #1a237e;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 8px;
+}
 
-    .day-card li {
-        margin-bottom: 6px;
-        color: #475569;
-    }
+.day-card ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.day-card li {
+    margin-bottom: 6px;
+    color: #475569;
+    overflow-wrap: anywhere;
+}
+
+.day-card li:last-child {
+    margin-bottom: 0;
+}
+
+/* ===== FORM THÊM VIỆC ===== */
 
 .form-card {
     background: white;
@@ -93,44 +124,49 @@ nav a {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-    .form-card h2 {
-        text-align: center;
-        margin-top: 0;
-        color: #1a237e;
-        margin-bottom: 20px;
-    }
+.form-card h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #1a237e;
+    margin-bottom: 20px;
+}
 
 .form-group {
     margin-bottom: 15px;
 }
 
-    .form-group label {
-        display: block;
-        font-weight: 600;
-        margin-bottom: 5px;
-        color: #334155;
-    }
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #334155;
+}
 
-    /* Định dạng chung cho cả ô input và ô select để chúng giống hệt nhau */
-    .form-group input,
-    .form-group select {
-        width: 100%;
-        padding: 10px 12px;
-        border: 1px solid #cbd5e1;
-        border-radius: 6px;
-        box-sizing: border-box;
-        font-size: 1rem;
-        outline: none;
-        background-color: #ffffff;
-        font-family: inherit;
-        transition: border-color 0.2s;
-    }
+/* Định dạng chung cho input và select */
 
-        /* Hiệu ứng khi click vào ô input hoặc select */
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: #1a237e;
-        }
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    outline: none;
+    background-color: #ffffff;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Hiệu ứng khi chọn ô nhập liệu */
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #1a237e;
+    box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.12);
+}
+
+/* ===== NÚT THÊM VIỆC ===== */
 
 .btn-submit {
     width: 100%;
@@ -141,12 +177,26 @@ nav a {
     border-radius: 6px;
     font-size: 1rem;
     font-weight: bold;
+    font-family: inherit;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-    .btn-submit:hover {
-        background: #3949ab;
-    }
+.btn-submit:hover {
+    background: #3949ab;
+    transform: translateY(-2px);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+.btn-submit:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+/* ===== ĐOẠN TỔNG KẾT ===== */
 
 .summary-text {
     text-align: center;
@@ -158,6 +208,8 @@ nav a {
     border: 1px solid #bae6fd;
 }
 
+/* ===== FOOTER ===== */
+
 footer {
     background: #0f172a;
     color: white;
@@ -166,11 +218,70 @@ footer {
     margin-top: 40px;
 }
 
-    footer a {
-        color: #93c5fd;
-        text-decoration: none;
+footer p {
+    margin: 0;
+}
+
+footer a {
+    color: #93c5fd;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVE CHO ĐIỆN THOẠI ===== */
+
+@media screen and (max-width: 600px) {
+
+    header {
+        padding: 25px 12px;
     }
 
-        footer a:hover {
-            text-decoration: underline;
-        }
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    header p {
+        font-size: 0.9rem;
+    }
+
+    nav ul {
+        gap: 6px;
+    }
+
+    nav a {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+
+    .container {
+        margin: 20px auto;
+        padding: 0 12px;
+    }
+
+    .day-card {
+        padding: 16px 18px;
+        margin-bottom: 15px;
+    }
+
+    .day-card h2 {
+        font-size: 1.1rem;
+    }
+
+    .form-card {
+        padding: 20px 16px;
+    }
+
+    .summary-text {
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+
+    footer {
+        padding: 18px 12px;
+        font-size: 0.9rem;
+    }
+}
+
